@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="assets/00_base">
+<body>
+<div id="page" layout:fragment="content">
+    <div th:if="${!session.isEmpty()}">
+        <p th:text="${session.user.getName()}"></p>
+        <p th:text="${session.user.getEmail()}"></p>
+    </div>
+    <div th:if="${session.isEmpty()}">
+        <form th:action="@{/user}" th:object="${user}" method="post">
+            <input
+                    type="email"
+                    name="email"
+                    th:field="*{email}"
+                    placeholder="E-Mail"
+            ><br>
+            <input
+                    type="password"
+                    name="password"
+                    th:field="*{password}"
+                    placeholder="Password"
+            ><br>
+            <input
+                    type="submit"
+                    name="submit"
+                    value="LogIn"
+            >
+        </form>
+    </div>
+</div>
+</body>
+</html>
